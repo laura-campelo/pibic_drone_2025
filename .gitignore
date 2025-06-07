@@ -1,0 +1,24 @@
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de log
+*.log
+*.aux
+*.toc
+
+# Ignorar pastas de build
+/build/
+/dist/
+/bin/
+/obj/
+
+# Ignorar dependências (ex: Node.js, Python, etc)
+node_modules/
+venv/
+__pycache__/
+
+# Ignorar arquivos de configuração locais
+.env
+*.sqlite3
+*.bak
