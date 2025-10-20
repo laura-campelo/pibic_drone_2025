@@ -26,17 +26,44 @@ fertilizantes e defensivos agrícolas, otimizando o uso desses recursos; e para 
 da utilização de sensores para capturar dados meteorológicos e identificar doenças precocemente.
 
 \subsection{Estado da Arte}
-Nos últimos anos, vários estudos têm investigado formas de controlar drones quadrirotores, tentando equilibrar estabilidade, precisão e robustez em diferentes cenários. Em \cite{usp}, o foco foi no projeto, construção e controle de quadrirotores visando o mercado de monitoramento, vigilância e resgate. Para a modelagem, foram utilizadas equações de Newton-Euler, uma estrutura em ``X'' e sensores diversos. Os controladores lineares com alocação de polos e LQR, combinados com filtro de Kalman, foram simulados no MATLAB/Simulink e testados via HIL. Os resultados mostraram respostas suaves, menor consumo de energia e boa rejeição a ruídos, mas o HIL apresentou algumas instabilidades devido a vibrações e atrasos.
+Nos últimos anos, vários estudos têm investigado formas de controlar drones quadrirotores, tentando equilibrar 
+estabilidade, precisão e robustez em diferentes cenários. Em \cite{usp}, o foco foi no projeto, construção e 
+controle de quadrirotores visando o mercado de monitoramento, vigilância e resgate. Para a modelagem, foram 
+utilizadas equações de Newton-Euler, uma estrutura em ``X'' e sensores diversos. Os controladores lineares 
+com alocação de polos e LQR, combinados com filtro de Kalman, foram simulados no MATLAB/Simulink e testados 
+via HIL. Os resultados mostraram respostas suaves, menor consumo de energia e boa rejeição a ruídos, mas o HIL 
+apresentou algumas instabilidades devido a vibrações e atrasos.
 
-Já o trabalho de \cite{he} propôs um controle fuzzy adaptativo PID para quadrirotores usados na agricultura, tentando superar limitações do PID clássico. A modelagem foi feita novamente com equações de Newton-Euler simplificadas, porém, aqui, o controlador ajusta dinamicamente os ganhos $K_p$, $K_i$ e $K_d$ usando lógica fuzzy, funções gaussianas e 49 regras. Nas simulações, o overshoot caiu $40\%$, o tempo de assentamento foi reduzido à metade, os distúrbios externos foram melhor rejeitados e a saída de controle ficou $25\%$ mais eficiente.
+Já o trabalho de \cite{he} propôs um controle fuzzy adaptativo PID para quadrirotores usados na agricultura, tentando 
+superar limitações do PID clássico. A modelagem foi feita novamente com equações de Newton-Euler simplificadas, porém, 
+aqui, o controlador ajusta dinamicamente os ganhos $K_p$, $K_i$ e $K_d$ usando lógica fuzzy, funções gaussianas e $49$ 
+regras. Nas simulações, o overshoot caiu $40\%$, o tempo de assentamento foi reduzido à metade, os distúrbios externos 
+foram melhor rejeitados e a saída de controle ficou $25\%$ mais eficiente.
 
-O estudo de \cite{memon} tratou de um controle PD-PID para manter o drone em hover. A ideia foi combinar controladores de altitude, orientação e posição, com PID adaptativo para ajuste dos ganhos proporcional e derivativo a fim de eliminar erros em estado estacionário. Nas simulações, percebeu-se que o PD-PID estabiliza rapidamente o drone em altitudes entre 2 e 4 metros, com tempos de 2 a 25 segundos, ângulos limitados a $\pm20°$ e sem overshoot significativo. Além disso, quando abordam possíveis futuras implementações em hardware real, os autores comentam sobre a necessidade de testes quanto à resistência à falhas, bem como à interferência do vento.
+O estudo de \cite{memon} tratou de um controle PD-PID para manter o drone em hover. A ideia foi combinar controladores 
+de altitude, orientação e posição, com PID adaptativo para ajuste dos ganhos proporcional e derivativo a fim de eliminar 
+erros em estado estacionário. Nas simulações, percebeu-se que o PD-PID estabiliza rapidamente o drone em altitudes entre 
+2 e 4 metros, com tempos de 2 a 25 segundos, ângulos limitados a $\pm20°$ e sem overshoot significativo. Além disso, 
+quando abordam possíveis futuras implementações em hardware real, os autores comentam sobre a necessidade de testes 
+quanto à resistência à falhas, bem como à interferência do vento.
 
-A tese de \cite{elkholy} explorou tanto controladores lineares quanto não lineares, incluindo PID/PD com algoritmo genético, PD com gain scheduling, Sliding Mode Control (SMC) e Backstepping. O PD se mostrou simples e eficiente, o gain scheduling melhorou o desempenho em trajetórias variáveis, o SMC ofereceu robustez a distúrbios e o Backstepping trouxe respostas suaves e baixo overshoot. Em geral, o estudo mostrou que controladores não lineares têm vantagem em regimes mais complexos e sob vento.
+A tese de \cite{elkholy} explorou tanto controladores lineares quanto não lineares, incluindo PID/PD com algoritmo 
+genético, PD com gain scheduling, Sliding Mode Control (SMC) e Backstepping. O PD se mostrou simples e eficiente, o 
+gain scheduling melhorou o desempenho em trajetórias variáveis, o SMC ofereceu robustez a distúrbios e o Backstepping 
+trouxe respostas suaves e baixo overshoot. Em geral, o estudo mostrou que controladores não lineares têm vantagem em 
+regimes mais complexos e sob vento.
 
-Por fim, a tese de \cite{thesis} derivou o modelo do quadrirotor via Newton-Euler, projetou LQR e ainda desenvolveu dois controladores não lineares baseados em linearização por feedback: inversão dinâmica e linearização exata. As simulações mostraram que o LQR é mais lento e suave, a linearização exata mais rápida e a inversão dinâmica ainda mais veloz, embora com um pequeno aumento de overshoot, mas todos conseguiram seguir trajetórias complexas de forma consistente.
+Por fim, a tese de \cite{thesis} derivou o modelo do quadrirotor via Newton-Euler, projetou LQR e ainda 
+desenvolveu dois controladores não lineares baseados em linearização por feedback: inversão dinâmica e 
+linearização exata. As simulações mostraram que o LQR é mais lento e suave, a linearização exata mais 
+rápida e a inversão dinâmica ainda mais veloz, embora com um pequeno aumento de overshoot, mas todos 
+conseguiram seguir trajetórias complexas de forma consistente.
 
-No geral, esses trabalhos mostram que, embora controladores lineares como LQR ainda sejam úteis por sua simplicidade, abordagens adaptativas e não lineares, como fuzzy PID, gain scheduling, SMC e Backstepping, são mais eficientes em cenários reais, com distúrbios e trajetórias complexas.
+No geral, esses trabalhos mostram que, embora controladores lineares como LQR ainda sejam úteis por sua simplicidade, 
+abordagens adaptativas e não lineares, como fuzzy PID, gain scheduling, SMC e Backstepping, são mais eficientes em 
+cenários reais, com distúrbios e trajetórias complexas.
 
 \subsection{Objetivos}
-Este trabalho pretende abarcar diferentes técnicas de controle para um modelo de drone quadrirotor de modo a possibilitar uma melhor compreensão quanto à dinâmica de um UAV desse estilo, bem como à teoria e à implementação das diferentes técnicas de controle clássico e moderno.
+Este trabalho pretende abarcar diferentes técnicas de controle para um modelo de drone quadrirotor de modo a 
+possibilitar uma melhor compreensão quanto à dinâmica de um UAV desse estilo, bem como à teoria e à implementação 
+das diferentes técnicas de controle clássico e moderno.
