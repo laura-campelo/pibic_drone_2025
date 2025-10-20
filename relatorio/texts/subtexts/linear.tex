@@ -1,2 +1,86 @@
 \section{Linearização}
-\lipsum[1]
+Observando as equações diferenciais apresentadas na seção anterior, é fácil notar que a dinâmica do drone possui 
+bastante não-linearidade na maioria de suas relações. Contudo, uma vasta gama de técnicas de controle se aplicam 
+somente, ou mais eficazmente, em sistemas lineares. Tendo isso em mente, decidiu-se fazer uma linearização desse 
+sistema em torno de um ponto de operação — que, nesse caso, corresponde ao instante em que a força gerada pelos 
+rotores equilibra exatamente o peso do equipamento — a fim de ser possível a utilização de técnicas de controle 
+como o LQR.
+
+A linearização em si é um processo que utiliza a expansão em série de Taylor e, ao desprezar os termos de ordem 
+superior, obtém-se um modelo aproximado do tipo $\dot{x}' = \mathbf{A} x' + \mathbf{B} u'$ e $y' = \mathbf{C} x' 
++ \mathbf{D} u'$, no qual:
+
+\begin{itemize}
+    \item $x'$ e $u'$ representam pequenas variações em torno do ponto de operação escolhido;
+    \item $\mathbf{A}$ representa as relações entre as variáveis de estado;
+    \item $\mathbf{B}$ representa como as entradas influenciam as variáveis de estado;
+    \item $\mathbf{C}$ representa como os estados se combinam para formar as saídas do sistema;
+    \item $\mathbf{D}$ representa a influência direta das entradas nas saídas.
+\end{itemize}
+
+Assim, para o caso do sistema do quadcóptero apresentado, 
+as matrizes linearizadas são as seguintes:
+
+\[
+\mathbf{A} =
+\left[\begin{array}{cccccccccccc}
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 9.81 & 0 & -0.534 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -9.81 & 0 & 0 & 0 & -0.534 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -0.534 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right],
+\]
+
+\vspace{+0.3cm}
+
+\[
+\mathbf{B} = 
+\left[
+\begin{array}{cccccccccccc}
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+6.37e-6 & 6.37e-6 & 6.37e-6 & 6.37e-6\\
+0 & -1.38e-4 & 0 & 1.38e-4\\
+-1.38e-4 & 0 & 1.38e-4 & 0\\
+-1.30e-5 & 1.30e-5 & -1.30e-5 & 1.30e-5
+\end{array}\right],
+\]
+
+\vspace{+0.3cm}
+
+\[
+\mathbf{C} = I_{12},
+% \left[
+% \begin{array}{cccccccccccc}
+% 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+% 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+% \end{array}\right],
+\]
+
+\[
+\mathbf{D} = 0.
+\]
