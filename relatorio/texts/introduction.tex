@@ -26,7 +26,17 @@ fertilizantes e defensivos agrícolas, otimizando o uso desses recursos; e para 
 da utilização de sensores para capturar dados meteorológicos e identificar doenças precocemente.
 
 \subsection{Estado da Arte}
-\lipsum[1]
+Nos últimos anos, vários estudos têm investigado formas de controlar drones quadrirotores, tentando equilibrar estabilidade, precisão e robustez em diferentes cenários. Em \cite{pfeifer}, o foco foi no projeto e controle de quadrirotores voltados para monitoramento, vigilância e resgate. Combinou-se modelagem dinâmica usando equações de Newton-Euler, uma estrutura em ``X'' e sensores diversos. Os controladores lineares com alocação de polos e LQR, combinados com filtro de Kalman, foram simulados no MATLAB/Simulink e testados via HIL. Os resultados mostraram respostas suaves, menor consumo de energia e boa rejeição a ruídos, mas o HIL apresentou algumas instabilidades devido a vibrações e atrasos.
+
+Já o trabalho de \cite{he} propôs um controle fuzzy adaptativo PID para quadrirotores usados na agricultura, tentando superar limitações do PID clássico. Eles modelaram o quadrirotor com equações de Newton-Euler simplificadas e fizeram o controlador ajustar dinamicamente os ganhos $K_p$, $K_i$ e $K_d$ usando lógica fuzzy, funções gaussianas e 49 regras. Nas simulações, o overshoot caiu $40\%$, o tempo de assentamento foi reduzido à metade, os distúrbios externos foram melhor rejeitados e a saída de controle ficou $25\%$ mais eficiente.
+
+O estudo de \cite{1} tratou de um controle PD-PID para manter o drone em hover, aproveitando sensores MEMS/NEMS. O sistema combinava controladores de altitude, orientação e posição, com PID adaptativo que ajusta automaticamente os ganhos proporcional e derivativo, garantindo que não haja erros em estado estacionário. As simulações mostraram que o PD-PID estabiliza rapidamente o drone em altitudes entre 2 e 4 metros, com tempos de 2 a 25 segundos, ângulos limitados a $\pm20°$ e sem overshoot significativo, o que indica precisão e robustez. Os autores comentam que, em futuras implementações em hardware real, seria interessante testar a resistência a falhas de atuadores e a ventos.
+
+A tese de \cite{elkholy} explorou tanto controladores lineares quanto não lineares, incluindo PID/PD com algoritmo genético, PD com gain scheduling, Sliding Mode Control (SMC) e Backstepping, para lidar com a dinâmica complexa do quadrirotor, incluindo efeitos aerodinâmicos e a dinâmica dos rotores. O PD se mostrou simples e eficiente, o gain scheduling melhorou o desempenho em trajetórias variáveis, o SMC ofereceu robustez a distúrbios com chattering reduzido e o Backstepping trouxe respostas suaves e baixo overshoot. Em geral, o estudo mostrou que controladores não lineares têm vantagem em regimes mais complexos e sob vento.
+
+Por fim, a tese de \cite{sabatino} derivou o modelo do quadrirotor via Newton-Euler, projetou LQR e ainda desenvolveu dois controladores não lineares baseados em linearização por feedback: inversão dinâmica e linearização exata. As simulações mostraram que o LQR é mais lento e suave, a linearização exata mais rápida e a inversão dinâmica ainda mais veloz, embora com um pequeno aumento de overshoot, mas todos conseguiram seguir trajetórias complexas de forma consistente.
+
+No geral, esses trabalhos mostram que, embora controladores lineares como LQR ainda sejam úteis por sua simplicidade, abordagens adaptativas e não lineares, como fuzzy PID, gain scheduling, SMC e Backstepping, são mais eficientes em cenários reais, com distúrbios e trajetórias complexas.
 
 \subsection{Objetivos}
 \lipsum[1]
