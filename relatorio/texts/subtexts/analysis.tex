@@ -25,14 +25,26 @@ da matriz dada são:
 \end{equation*}
 
 Observando os valores acima, nota-se que o sistema não pode ser considerado assintoticamente estável segundo Lyapunov 
-pois nem todas as partes reais de seus polos são negativas, havendo vários deles nulos.
+pois nem todas as partes reais de seus autovalores são negativas, havendo vários deles nulos.
 
 \subsection{Controlabilidade}
 A controlabilidade está associada à capacidade de um sistema ser controlado de forma eficaz. Em outras palavras, ela 
 analisa a capacidade das entradas disponíveis de levar o sistema, em um espaço de tempo finito, de qualquer um de seus 
 estados, considerado como inicial, até qualquer outro estado, considerado como final.
 
-FALTA COISAAAAAAAAAAAAAAAAAAAAAA
+Na prática, para sistemas lineares em formato de espaço de estados (ver seção anterior) essa análise é feita a 
+partir da matriz de controlabilidade (mostrada abaixo), em que, para que o sistema 
+seja considerado controlável, o posto dessa matriz deve ser igual à quantidade $n$ de estados do sistema (neste trabalho, 
+$n=12$).
+
+\begin{equation*}
+    \mathbf{C_M} = \begin{bmatrix}
+    B & AB & A^2B & \cdots & A^{n-1}B
+    \end{bmatrix}
+\end{equation*}
+
+Realizando os devidos cálculos com as matrizes $\mathbf{A}$ e $\mathbf{B}$ dadas anteriormente, obtém-se um posto 
+completo e, portanto, conclui-se que o sistema é controlável.
 
 \subsection{Observabilidade}
 \lipsum[1]
