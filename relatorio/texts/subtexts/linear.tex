@@ -4,7 +4,7 @@ bastante não-linearidade na maioria de suas relações. Contudo, uma vasta gama
 somente, ou mais eficazmente, em sistemas lineares. Tendo isso em mente, decidiu-se fazer uma linearização desse 
 sistema em torno de um ponto de operação — que, nesse caso, corresponde ao instante em que a força gerada pelos 
 rotores equilibra exatamente o peso do equipamento — a fim de ser possível a utilização de técnicas de controle 
-como o LQR.
+como o LQR, bem como de algumas técnicas de análise do sistema (ver próxima seção).
 
 A linearização em si é um processo que utiliza a expansão em série de Taylor e, ao desprezar os termos de ordem 
 superior, obtém-se um modelo aproximado do tipo $\dot{x}' = \mathbf{A} x' + \mathbf{B} u'$ e $y' = \mathbf{C} x' 
@@ -37,6 +37,7 @@ as matrizes linearizadas são as seguintes:
 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
 \end{array}\right],
+\label{mat:A_lin}
 \]
 
 \vspace{+0.3cm}

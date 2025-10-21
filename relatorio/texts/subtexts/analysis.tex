@@ -1,11 +1,38 @@
 \section{Análise do Sistema}
-\lipsum[1]
+Para construir controladores mais confiáveis e robustos, faz-se necessário entender como o sistema se comporta ao 
+reagir a entradas variadas. Essa compreensão permite, então, analisar algumas propriedades desse sistema, como 
+estabilidade, controlabilidade, observabilidade e, inclusive, o seu grau de acoplamento, informações essas 
+que se mostram valiosas para a extração de intuições quanto à viabilidade de implantação dos controladores.
 
 \subsection{Estabilidade}
-\lipsum[1]
+Neste trabalho, abordar-se-á dois critérios para a análise de estabilidade: BIBO (\textit{Bounded Input, Bounded 
+Output}) e Lyapunov. Para o primeiro critério, 
+um sistema é considerado estável se reage de forma limitada dada uma entrada limitada. No caso do drone, por exemplo, 
+se for mantida uma entrada constante e de mesmo valor nos quatro rotores, o drone continuaria subindo indefinidamente 
+caso a entrada inserida fosse forte o bastanta para vencer a resistência aplicada pelo próprio peso do aparelho. Dessa 
+forma, um drone é considerado um sistema BIBO instável.
+
+Já para Lyapunov, que é um critério mais abrangente que o anterior, busca-se verificar a convergência das respostas 
+do sistema em direção ao equilíbrio. Quando estamos tratando de sistemas lineares, uma forma de verificar essa 
+convergência é por meio dos autovalores da matriz $\mathbf{A}$ (definida anteriormente) de modo que, caso eles possuam 
+partes reais negativas, o sistema é considerado assintoticamente estável segundo Lyapunov. Assim, os autovalores 
+da matriz dada são:
+
+\begin{equation*}
+    \left[\begin{array}{cccccccccccc}
+        0 & 0 & -0.534 & -0.534 & 0 & 0 & 0 & 0 & -0.534 & 0 & 0 & 0
+    \end{array}\right].
+\end{equation*}
+
+Observando os valores acima, nota-se que o sistema não pode ser considerado assintoticamente estável segundo Lyapunov 
+pois nem todas as partes reais de seus polos são negativas, havendo vários deles nulos.
 
 \subsection{Controlabilidade}
-\lipsum[1]
+A controlabilidade está associada à capacidade de um sistema ser controlado de forma eficaz. Em outras palavras, ela 
+analisa a capacidade das entradas disponíveis de levar o sistema, em um espaço de tempo finito, de qualquer um de seus 
+estados, considerado como inicial, até qualquer outro estado, considerado como final.
+
+FALTA COISAAAAAAAAAAAAAAAAAAAAAA
 
 \subsection{Observabilidade}
 \lipsum[1]
