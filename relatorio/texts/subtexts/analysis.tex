@@ -36,7 +36,6 @@ Na prática, para sistemas lineares em formato de espaço de estados (ver seçã
 partir da matriz de controlabilidade (mostrada abaixo), em que, para que o sistema 
 seja considerado controlável, o posto dessa matriz deve ser igual à quantidade $n$ de estados do sistema (neste trabalho, 
 $n=12$).
-
 \begin{equation*}
     \mathbf{C_M} = \begin{bmatrix}
     B & AB & A^2B & \cdots & A^{n-1}B
@@ -47,7 +46,59 @@ Realizando os devidos cálculos com as matrizes $\mathbf{A}$ e $\mathbf{B}$ dada
 completo e, portanto, conclui-se que o sistema é controlável.
 
 \subsection{Observabilidade}
-\lipsum[1]
+A observabilidade está associada à capacidade de um sistema ser monitorado de forma eficaz. Em outras palavras, ela 
+analisa a capacidade de se reconstruir os estados do sistema a partir das entradas e das saídas conhecidas.
+
+Na prática, para sistemas lineares em formato de espaço de estados (ver seção anterior) essa análise é feita a 
+partir da matriz de observabilidade (mostrada abaixo), em que, da mesma forma que para a controlabilidade, 
+o posto dessa matriz deve ser igual à quantidade $n$ de estados do sistema (neste trabalho, 
+$n=12$) para que ele seja considerado observável.
+\begin{equation*}
+    \mathbf{O_M} = \begin{bmatrix}
+    C \\
+    CA \\
+    CA^2 \\
+    \vdots \\
+    CA^{n-1}
+    \end{bmatrix}
+\end{equation*}
+
+Realizando os devidos cálculos com as matrizes $\mathbf{A}$ e $\mathbf{C}$ dadas anteriormente, obtém-se novamente 
+um posto completo e, portanto, conclui-se que o sistema é observável.
 
 \subsection{Acoplamento}
-\lipsum[1]
+Para terminar esta análise, é preciso verificar o nível de acoplamento do sistema. Em outras palavras, 
+faz-se necessário avaliar quanto cada entrada (ou seja, $U_1, U_2, U_3, U_4$ definidas na seção 
+\ref{sec:ac_control}) influencia cada saída (por simplicidade, $z, \phi, \theta, \psi$ definididas na 
+Tabela \ref{tab:vars}). Na prática, utiliza-se a Matriz de Ganhos Relativos (RGA) definida como:
+\begin{equation*}
+    \mathbf{RGA} = G \cdot {(G^{-1})}^T
+\end{equation*}
+
+\noindent em que $G$ é a matriz de ganhos do sistema definida em estado estacionário. Aplicando a fórmula 
+acima para o sistema em questão, obtemos:
+\begin{table}[h!]
+    \centering
+    \caption{Matriz de Ganho Relativo do Sistema}
+    \begin{tabular}{c|cccc}
+        & $U_1$ & $U_2$ & $U_3$ & $U_4$\\
+        \hline
+        $z$ & $0.25$ & $0.25$ & $0.25$ & $0.25$\\
+        $\phi$ & $0$ & $0.5$ & $0$ & $0.5$\\
+        $\theta$ & $0.5$ & $0$ & $0.5$ & $0$\\
+        $\psi$ & $0.25$ & $0.25$ & $0.25$ & $0.25$
+    \end{tabular}%
+    \label{tab:rga}
+\end{table}.
+
+Para interpretar esses resultados, é preciso saber que valores iguais ou bastante próximos a $1$ 
+querem dizer que aquele par de variáveis pode ser utilizado para um controle isolado do resto do sistema, 
+enquanto valores diferentes indicam que as saídas são influenciadas pelas entradas em graus similares e, 
+portanto, não podem ser facilmente separadas em pares de controle isolados. Assim, observando a Tabela 
+\ref{tab:rga}, nota-se que o drone é possui um grau de acoplamento bastante elevado e que, portanto, 
+não é possível separá-lo em pares de variáveis controladas separadamente. Além disso, levando em conta 
+apenas as entradas e saídas mostrada na Tabela \ref{tab:rga}, seriam necessários $12$ desacopladores para 
+fazer uma separação melhor entre as influências mútuas, o que aumentaria desnecessariamente a complexidade 
+do problema. Essa constatação levou a decisão de se lidar diretamente com o modelo não-linear e buscar 
+alternativas de controle que se adaptassem a essa abordagem, já que opções mais clássicas seriam inadequadas 
+devido à necessidade de projeto de muitos desacopladores.
