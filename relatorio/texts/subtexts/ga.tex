@@ -1,2 +1,125 @@
-\subsection{Algoritmos Genéticos}
-\lipsum[1]
+\section{Algoritmos Genéticos (GA)}
+
+\subsection{Conceito}
+O controlador PID utiliza três ações (proporcional, integral e derivativa) para minimizar a 
+diferença entre a saída e a referência de um sistema, porém sua eficácia depende bastante da 
+seleção apropriada dos ganhos $K_p, K_i \text{ e } K_d$, o que se torna penoso de fazer manualmente quando 
+se está lidando com um sistema não-linear complexo como o caso do drone. Para superar essa 
+dificuldade, optou-se por se fazer a utilização de algoritmos genéticos na obtenção desses 
+ganhos.
+
+Como o próprio nome sugere, os GA se baseiam no príncipio de evolução proposto por Charles Darwin 
+em seu livro \textit{A Origem das Espécies} publicado pela primeira vez em 1859. A ideia geral é utilizar 
+conceitos como seleção, cruzamento e mutação para selecionar os indivíduos mais bem adaptados ao ambiente. 
+No das aplicações em otimização, os indivíduos correspondem a possíveis soluções (neste caso, 
+possíveis tuplas de valores para $K_p, K_i \text{ e } K_d$) e a medida de adaptação do indivídio ao problema 
+em questão é medido por meio de uma função de \textit{fitness}, a qual, neste trabalho, foi definida 
+da seguinte forma:
+\begin{equation}
+    F(K_p, K_i, K_d) = \frac{1}{1+ \int_{0}^{t_{end}} \sum_{i=1}^{N} \lambda_{i}E_{x_i}(t)^2 + \lambda_i^IEI_{x_i}(t)^2 + \lambda_i^DED_{x_i}(t)^2  dt},
+    \label{eq:ga}
+\end{equation}
+
+\noindent em que $E_{x_i}(t)$ representa o erro entre a saída do sistema e a trajetória desejada 
+para a variável $x_i$ do sistema, $EI_{x_i}(t)$ é o erro integral, e $ED_{x_i}(t)$ é o erro derivativo. 
+Os pesos $\lambda_i$, $\lambda_i^I$, e $\lambda_i^D$ são atribuídos às variáveis $x_i$ para os erros 
+$E_{x_i}$, $EI_{x_i}$ e $ED_{x_i}$, respectivamente, permitindo ajustar a importância relativa de 
+cada termo na função de custo.
+
+Dessa forma, o objetivo do algoritmo genético é maximizar função de \textit{fitness} dada em \ref{eq:ga} 
+a fim de obter os ganhos $K_p, K_i \text{ e } K_d$ ótimos para o controlador.
+
+\subsection{Implementação}
+O controlador do drone foi projetado com quatro malhas PID independentes, cada uma responsável por 
+uma variável: $z$, $\phi$, $\theta$ e $\psi$. O controle 
+simultâneo dessas variáveis permite gerenciar o movimento nas direções $x$ e $y$ por meio de um 
+loop externo com ganho proporcional. Para simplificar a otimização, foram adotados os mesmos ganhos para $\phi$ e $\theta$, 
+visto que o drone é simétrico em relação a esses eixos, totalizando nove parâmetros ajustáveis: 
+três para $z$, três para $\phi$ e $\theta$, e três para $\psi$.
+
+Além disso, a função custo (parte integral da função de \textit{fitness}) 
+foi implementada em C com a biblioteca GSL (versão 2.1.7), considerando pesos $\lambda = 1$ para 
+todas as variáveis, exceto $\lambda^D_{\phi}$ e $\lambda^D_{\theta}$, definidos como $1000$ para 
+penalizar variações bruscas de atitude. A simulação teve duração de $60s$ e frequência de amostragem 
+de $100$ Hz, com referências variando conforme descrito na Tabela \ref{tab:ref_traj}, de modo a 
+testar a resposta dos controladores em diferentes condições.
+\vspace{-0.2cm}
+\begin{table}[h!]
+    \centering
+    \caption{Referências aplicadas às variáveis controladas}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Variável} & \textbf{Mudança da Referência} \\
+        \hline
+        $z$ & $2m \text{ em } t=0$s; $1m \text{ em } t=24$s \\
+        \hline
+        $\phi$ & $10\degree \text{ em } t=6$s; $0\degree \text{ em } t=18$s \\
+        \hline
+        $\theta$ & $5\degree \text{ em } t=5$s; $0\degree \text{ em } t=27$s \\
+        \hline
+        $\psi$ & $90\degree \text{ em } t=33$s; $0\degree \text{ em } t=45$s \\
+        \hline
+    \end{tabular}%
+    \label{tab:ref_traj}
+\end{table}
+
+A otimização dos ganhos $K_p$, $K_i$ e $K_d$ foi realizada por meio de GA implementado em Python 
+com a biblioteca PyGAD (versão 3.4.0). Os parâmetros utilizados estão listados na Tabela 
+\ref{tab:ga_params_summary}.
+\vspace{-0.2cm}
+\begin{table}[h!]
+    \centering
+    \caption{Parâmetros principais do Algoritmo Genético}
+    \begin{tabular}{|c|c||c|c|}
+        \hline
+        \emph{Parâmetro} & \emph{Valor} & \emph{Parâmetro} & \emph{Valor} \\
+        \hline
+        Gerações & $500$ & Soluções por População & $2000$ \\
+        \hline
+        Pais por Cruzamento & $1000$ & Pais Mantidos & $2$ \\
+        \hline
+        Genes (ganhos PID) & $9$ & Tipo de Cruzamento & \texttt{single\_point} \\
+        \hline
+        Seleção de Pais & \texttt{tournament} & Tipo de Mutação & \texttt{random} \\
+        \hline
+        Percentual de Genes Mutados & $30\%$ & Intervalo Inicial & $[0, 10^5]$ \\
+        \hline
+    \end{tabular}
+    \label{tab:ga_params_summary}
+\end{table}
+
+\subsection{Resultados}
+Os parâmetros otimizados resultantes estão organizados na Tabela \ref{tab:pid_values}.
+\begin{table}[h!]
+    \centering
+    \caption{Valores Otimizados para os Controladores PID}
+    \label{tab:pid_values}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Variável} & \textbf{$K_p$} & \textbf{$K_i$} & \textbf{$K_d$} \\ \hline
+        $z$              & 98869.42       & 44642.92       & 61770.49       \\ \hline
+        $\phi$, $\theta$ & 99033.59       & 33359.94       & 96089.17       \\ \hline
+        $\psi$           & 98701.15       & 46709.60       & 72527.38       \\ \hline
+    \end{tabular}
+\end{table}
+
+O desempenho do controlador PID otimizado é ilustrado na Figura \ref{fig:ga_performance}.
+\begin{figure}[h!]
+    \centering
+    \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético.}
+    \includegraphics[width=0.9\textwidth]{figs/ga_inner.pdf}
+    \label{fig:ga_performance}
+\end{figure}
+\label{par:ga_cascate}
+
+Isto posto, foi preciso, então, implementar dois controladores adicionais para gerenciar as 
+variáveis $x$ e $y$ do drone. Esses controladores foram configurados de modo que um erro de $1m$ 
+em $x$ ou $y$ causasse um de $3\degree$ em $\phi$ ou $\theta$. Adicionalmente, foi 
+especificado um limite máximo de $10\degree$ para as referências de $\phi$ e $\theta$. A Figura 
+\ref{fig:ga_outer_performance} apresenta o resultado final para o controlador em cascata. 
+\begin{figure}[h!]
+    \centering
+    \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético Cascata.}
+    \includegraphics[width=0.9\textwidth]{figs/ga_cas.pdf}
+    \label{fig:ga_outer_performance}
+\end{figure}

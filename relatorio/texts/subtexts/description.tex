@@ -15,8 +15,8 @@ obtenção das coordenadas de posição no espaço.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{figs/desenho_drone.png}
     \caption{Esquema de um quadcóptero. \cite{luukkonen}}
+    \includegraphics[width=0.8\textwidth]{figs/desenho_drone.png}
     \label{fig:modelo}
 \end{figure}
 
@@ -25,7 +25,7 @@ obtenção das coordenadas de posição no espaço.
 Passando para uma interpretação mais matemática do modelo do drone, é importante explicitar as equações diferenciais 
 que regem a dinâmica do sistema, porém, antes disso, é preciso definir suas variáveis de estado (ver Tabela \ref{tab:vars}) 
 e seus parâmetros (ver Tabela \ref{tab:params}).
-
+\vspace{-0.2cm}
 \begin{table}[h!]
     \centering
     \caption{Variáveis de estado do sistema}
@@ -71,7 +71,7 @@ e seus parâmetros (ver Tabela \ref{tab:params}).
 
 Com isto definido, a seguir estão as doze equações diferenciais que descrevem o comportamento dinâmico do drone:
 
-\vspace{+0.5cm}
+\vspace{-0.2cm}
 
 \begin{minipage}{0.5\textwidth}
     \begin{equation*}
@@ -101,33 +101,35 @@ Com isto definido, a seguir estão as doze equações diferenciais que descrevem
     \end{equation*}
 \end{minipage}
 
-\vspace{+0.5cm}
+\vspace{+0.3cm}
 
-Onde $s_{\gamma}$ e $c_{\gamma}$ são as funções seno e cosseno, respectivamente, de um ângulo $\gamma$.
+\noindent em que $s_{\gamma}$ e $c_{\gamma}$ são as funções seno e cosseno, respectivamente, de um ângulo $\gamma$.
 
 \subsection{Ações de Controle \label{sec:ac_control}}
 
+Por fim, a Figura \ref{fig:movimento} detalha todas as relações entre as potências das velocidades angulares 
+dos rotores com cada um dos movimentos que o drone é capaz de fazer.
+Como é possível notar, todos os movimentos precisam da ação conjunta dos rotores para ser realizado, de modo que 
+as ações do controlador, as quais buscam controlar as saídas do modelo (como, por exemplo, movimentação em $z$ ou 
+angulação em $\phi$), são dadas em funções dessas saídas, o que torna necessária uma conversão entre as ações dadas 
+pelo controlador e aquelas que serão efetivamente enviadas para os motores.
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.65\textwidth]{figs/mov_drone.png}
     \caption{Correspondências entre velocidades angulares e movimentações do crone. \cite{usp}}
+    \includegraphics[width=0.6\textwidth]{figs/mov_drone.png}
     \label{fig:movimento}
 \end{figure}
 
 \pagebreak
 
-Por fim, a Figura \ref{fig:movimento} acima detalha todas as relações entre as potências das velocidades angulares 
-dos rotores com cada um dos movimentos que o drone é capaz de fazer.
-Como é possível notar, todos os movimentos precisam da ação conjunta dos rotores para ser realizado, de modo que 
-as ações do controlador, as quais buscam controlar as saídas do modelo (como, por exemplo, movimentação em $z$ ou 
-angulação em $\phi$), são dadas em funções dessas saídas, o que torna necessária uma conversão entre as ações dadas 
-pelo controlador e aquelas que serão efetivamente enviadas para os motores. Foi por esse motivo que se decidiu criar 
+Foi por esse motivo que se decidiu criar 
 um ``bloco'' a mais no diagrama de controle que fosse responsável apenas por fazer essa conversão. Assim, as relações 
 que são usadas para tal são as seguintes:
 \begin{eqnarray}
-    U_1 &=& U_z - U_\theta - U_\psi + \text{bias} \\
-    U_2 &=& U_z - U_\phi + U_\psi + \text{bias} \\
-    U_3 &=& U_z + U_\theta - U_\psi + \text{bias} \\
-    U_4 &=& U_z + U_\phi + U_\psi + \text{bias}
+    U_1 &=& U_z - U_\theta - U_\psi + \text{bias,} \\
+    U_2 &=& U_z - U_\phi + U_\psi + \text{bias,} \\
+    U_3 &=& U_z + U_\theta - U_\psi + \text{bias,} \\
+    U_4 &=& U_z + U_\phi + U_\psi + \text{bias,}
 \end{eqnarray}
-Onde $\text{bias}$ é um valor das velocidades angulares dos rotores que equilibram com a força peso.
+\noindent em que $\text{bias}$ é um valor das velocidades angulares dos rotores que equilibram com a força peso.

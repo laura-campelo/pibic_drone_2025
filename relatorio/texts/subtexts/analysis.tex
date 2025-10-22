@@ -17,7 +17,6 @@ do sistema em direção ao equilíbrio. Quando estamos tratando de sistemas line
 convergência é por meio dos autovalores da matriz $\mathbf{A}$ (definida anteriormente) de modo que, caso eles possuam 
 partes reais negativas, o sistema é considerado assintoticamente estável segundo Lyapunov. Assim, os autovalores 
 da matriz dada são:
-
 \begin{equation*}
     \left[\begin{array}{cccccccccccc}
         0 & 0 & -0.534 & -0.534 & 0 & 0 & 0 & 0 & -0.534 & 0 & 0 & 0
@@ -72,7 +71,7 @@ faz-se necessário avaliar quanto cada entrada (ou seja, $U_1, U_2, U_3, U_4$ de
 \ref{sec:ac_control}) influencia cada saída (por simplicidade, $z, \phi, \theta, \psi$ definididas na 
 Tabela \ref{tab:vars}). Na prática, utiliza-se a Matriz de Ganhos Relativos (RGA) definida como:
 \begin{equation*}
-    \mathbf{RGA} = G \cdot {(G^{-1})}^T
+    \mathbf{RGA} = G \cdot {(G^{-1})}^T,
 \end{equation*}
 
 \noindent em que $G$ é a matriz de ganhos do sistema definida em estado estacionário. Aplicando a fórmula 
@@ -89,12 +88,16 @@ acima para o sistema em questão, obtemos:
         $\psi$ & $0.25$ & $0.25$ & $0.25$ & $0.25$
     \end{tabular}%
     \label{tab:rga}
-\end{table}.
+\end{table}
+
+\pagebreak
 
 Para interpretar esses resultados, é preciso saber que valores iguais ou bastante próximos a $1$ 
 querem dizer que aquele par de variáveis pode ser utilizado para um controle isolado do resto do sistema, 
 enquanto valores diferentes indicam que as saídas são influenciadas pelas entradas em graus similares e, 
-portanto, não podem ser facilmente separadas em pares de controle isolados. Assim, observando a Tabela 
+portanto, não podem ser facilmente separadas em pares de controle isolados.
+
+Assim, observando a Tabela 
 \ref{tab:rga}, nota-se que o drone é possui um grau de acoplamento bastante elevado e que, portanto, 
 não é possível separá-lo em pares de variáveis controladas separadamente. Além disso, levando em conta 
 apenas as entradas e saídas mostrada na Tabela \ref{tab:rga}, seriam necessários $12$ desacopladores para 
