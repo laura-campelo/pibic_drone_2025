@@ -43,14 +43,17 @@ todas as variáveis, exceto $\lambda^D_{\phi}$ e $\lambda^D_{\theta}$, definidos
 penalizar variações bruscas de atitude. A simulação teve duração de $60s$ e frequência de amostragem 
 de $100$ Hz, com referências variando conforme descrito na Tabela \ref{tab:ref_traj}, de modo a 
 testar a resposta dos controladores em diferentes condições.
-\vspace{-0.2cm}
-\begin{table}[h!]
-    \centering
-    \caption{Referências aplicadas às variáveis controladas}
-    \begin{tabular}{|c|c|}
+\vspace{-0.5cm}
+\begin{center}
+    \begin{longtable}{|c|c|}
+        \caption{Referências aplicadas às variáveis controladas} \vspace{-0.7cm}
+        \label{tab:ref_traj}
         \hline
-        \textbf{Variável} & \textbf{Mudança da Referência} \\
+        \emph{Variável} & \emph{Mudança da Referência} \\
         \hline
+        \endfirsthead
+        \endhead
+
         $z$ & $2m \text{ em } t=0$s; $1m \text{ em } t=24$s \\
         \hline
         $\phi$ & $10\degree \text{ em } t=6$s; $0\degree \text{ em } t=18$s \\
@@ -59,9 +62,29 @@ testar a resposta dos controladores em diferentes condições.
         \hline
         $\psi$ & $90\degree \text{ em } t=33$s; $0\degree \text{ em } t=45$s \\
         \hline
-    \end{tabular}%
-    \label{tab:ref_traj}
-\end{table}
+    \end{longtable}
+\end{center}
+\vspace{-1.5cm}
+% \begin{table}[h!]
+%     \centering
+%     \caption{Referências aplicadas às variáveis controladas}
+%     \begin{tabular}{|c|c|}
+%         \hline
+%         \textbf{Variável} & \textbf{Mudança da Referência} \\
+%         \hline
+%         $z$ & $2m \text{ em } t=0$s; $1m \text{ em } t=24$s \\
+%         \hline
+%         $\phi$ & $10\degree \text{ em } t=6$s; $0\degree \text{ em } t=18$s \\
+%         \hline
+%         $\theta$ & $5\degree \text{ em } t=5$s; $0\degree \text{ em } t=27$s \\
+%         \hline
+%         $\psi$ & $90\degree \text{ em } t=33$s; $0\degree \text{ em } t=45$s \\
+%         \hline
+%     \end{tabular}%
+%     \label{tab:ref_traj}
+% \end{table}
+
+% \pagebreak
 
 A otimização dos ganhos $K_p$, $K_i$ e $K_d$ foi realizada por meio de GA implementado em Python 
 com a biblioteca PyGAD (versão 3.4.0). Os parâmetros utilizados estão listados na Tabela 
@@ -102,24 +125,4 @@ Por fim, os parâmetros otimizados resultantes estão organizados na Tabela \ref
     \end{tabular}
 \end{table}
 
-% \subsection{Resultados}
-
-% O desempenho do controlador PID otimizado é ilustrado na Figura \ref{fig:ga_performance}.
-% \begin{figure}[h!]
-%     \centering
-%     \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético.}
-%     \includegraphics[width=0.9\textwidth]{figs/ga_inner.pdf}
-%     \label{fig:ga_performance}
-% \end{figure}
-
-% Isto posto, foi preciso, então, implementar dois controladores adicionais para gerenciar as 
-% variáveis $x$ e $y$ do drone. Esses controladores foram configurados de modo que um erro de $1m$ 
-% em $x$ ou $y$ causasse um de $3\degree$ em $\phi$ ou $\theta$. Adicionalmente, foi 
-% especificado um limite máximo de $10\degree$ para as referências de $\phi$ e $\theta$. A Figura 
-% \ref{fig:ga_outer_performance} apresenta o resultado final para o controlador em cascata. 
-% \begin{figure}[h!]
-%     \centering
-%     \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético Cascata.}
-%     \includegraphics[width=0.9\textwidth]{figs/ga_cas.pdf}
-%     \label{fig:ga_outer_performance}
-% \end{figure}
+.

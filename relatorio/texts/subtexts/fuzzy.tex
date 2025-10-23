@@ -49,17 +49,13 @@ implementação foi feita em Python, utilizando as bibliotecas \texttt{scikit-fu
 Como o drone é simétrico, os controladores de $\phi$ e $\theta$, bem como os de $x$ e $y$, 
 compartilham, respectivamente, as mesmas funções de pertinência. Por fim, foram definidas duas 
 entradas para cada controlador — $E_i$ (erro em $i$) e $V_i$ (velocidade em $i$) —, bem como uma 
-saída — $U_i$ (saída de controle em $i$). A Tabela \ref{} agrupa todas as funções de pertinência 
+saída — $U_i$ (saída de controle em $i$). A Tabela \ref{tab:func_pert} agrupa todas as funções de pertinência 
 utilizadas neste trabalho.
 
 \input{texts/subtexts/tab_fuzzy.tex}
 
-\pagebreak
-
-FALTA COISAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
 Por fim, seguem abaixo as regras implementadas nos controladores fuzzy:
-
+\vspace{-0.3cm}
 \begin{equation*}
 \begin{aligned}
     &\text{1. } \textit{if } E \textit{ is } ++ \textit{ then } U \textit{ is } ++, \\

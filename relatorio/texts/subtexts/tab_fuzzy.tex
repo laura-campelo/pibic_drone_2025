@@ -1,99 +1,78 @@
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-    Variável & Conjunto Linguístico & Função de Pertinência & Começo & Pico & Fim \\
-    \hline
-    $E_x$ & $--$ & Triangular & -10 & -10 & -1 \\
-    $E_x$ & $-$  & Triangular & -10 & -1 & 0 \\
-    $E_x$ & $0$  & Triangular & -1 & 0 & 1 \\
-    $E_x$ & $+$  & Triangular & 0 & 1 & 10 \\
-    $E_x$ & $++$ & Triangular & 1 & 10 & 10 \\
-    \hline
-    $E_{z}$ & $--$ & Triangular & -10 & -10 & -0.01 \\
-    $E_{z}$ & $-$  & Triangular & -10 & -0.01 & 0 \\
-    $E_{z}$ & $0$  & Triangular & -0.01 & 0 & 0.01 \\
-    $E_{z}$ & $+$  & Triangular & 0 & 0.01 & 10 \\
-    $E_{z}$ & $++$ & Triangular & 0.01 & 10 & 10 \\
-    \hline
-    $E_{\phi}$ & $--$ & Triangular & -15 & -15 & -0.1 \\
-    $E_{\phi}$ & $-$  & Triangular & -15 & -0.1 & 0 \\
-    $E_{\phi}$ & $0$  & Triangular & -0.1 & 0 & 0.1 \\
-    $E_{\phi}$ & $+$  & Triangular & 0.1 & 0.1 & 15 \\
-    $E_{\phi}$ & $++$ & Triangular & 0.1 & 15 & 15 \\
-    \hline
-    $E_{\psi}$ & $--$ & Triangular & -45 & -45 & -0.1 \\
-    $E_{\psi}$ & $-$  & Triangular & -45 & -0.1 & 0 \\
-    $E_{\psi}$ & $0$  & Triangular & -0.1 & 0 & 0.1 \\
-    $E_{\psi}$ & $+$  & Triangular & 0.1 & 0.1 & 45 \\
-    $E_{\psi}$ & $++$ & Triangular & 0.1 & 45 & 45 \\
-    \hline
-\end{tabular}
+\vspace{-0.5cm}
+\begin{center}
+    \begin{longtable}{|c|c|c|c|c|c|} % <-- note o uso de p{largura}
+        \caption{Funções de Pertinência} \vspace{-0.7cm}
+        \label{tab:func_pert}
+        \hline
+        Variável & Conjunto Linguístico & Função de Pertinência & Começo & Pico & Fim \\
+        \hline
+        \endfirsthead
+        \endhead
 
-\caption{Funções de Pertinência do erro $E$.}
-\label{tab:fuzzy_error}
-\end{table}
-
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-    Variável & Conjunto Linguístico & Função de Pertinência & Começo & Pico & Fim \\
-    \hline
-    $V_x$ & $-$ & Triangular & -5 & -5 & -0 \\
-    $V_x$ & $0$  & Triangular & -5 & 0 & 5 \\
-    $V_x$ & $+$ & Triangular & 0 & 5 & 5 \\
-    \hline
-    $V_{z}$ & $-$  & Triangular & -50 & -50 & 0 \\
-    $V_{z}$ & $0$  & Triangular & -50 & 0 & 50 \\
-    $V_{z}$ & $+$  & Triangular & 0 & 50 & 50 \\
-    \hline
-    $V_{\phi}$ & $-$  & Triangular & -20 & -20 & 0 \\
-    $V_{\phi}$ & $0$  & Triangular & -20 & 0 & 20 \\
-    $V_{\phi}$ & $+$  & Triangular & 20 & 30 & 20 \\
-    \hline
-    $V_{\psi}$ & $-$  & Triangular & -20 & -20 & 0 \\
-    $V_{\psi}$ & $0$  & Triangular & -20 & 0 & 20 \\
-    $V_{\psi}$ & $+$  & Triangular & 20 & 20 & 20 \\
-    \hline
-\end{tabular}
-\caption{Funções de Pertinência da velocidade $V$.}
-\label{tab:fuzzy_error}
-\end{table}
-
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-    Variável & Conjunto Linguístico & Função de Pertinência & Começo & Pico & Fim \\
-    \hline
-    $U_x$ & $--$ & Triangular & -20 & -20 & -10 \\
-    $U_x$ & $-$  & Triangular & -20 & -10 & 0 \\
-    $U_x$ & $0$  & Triangular & -10 & 0 & 10 \\
-    $U_x$ & $+$  & Triangular & 0 & 10 & 20 \\
-    $U_x$ & $++$ & Triangular & 10 & 20 & 20 \\
-    \hline
-    $U_{z}$ & $--$ & Triangular & -100 & -100 & -50 \\
-    $U_{z}$ & $-$  & Triangular & -100 & -50 & 0 \\
-    $U_{z}$ & $0$  & Triangular & -50 & 0 & 50 \\
-    $U_{z}$ & $+$  & Triangular & 0 & 50 & 100 \\
-    $U_{z}$ & $++$ & Triangular & 50 & 100 & 100 \\
-    \hline
-    $U_{\phi}$ & $--$ & Triangular & -100 & -100 & -30 \\
-    $U_{\phi}$ & $-$  & Triangular & -100 & -30 & 0 \\
-    $U_{\phi}$ & $0$  & Triangular & -30 & 0 & 30 \\
-    $U_{\phi}$ & $+$  & Triangular & 30 & 30 & 100 \\
-    $U_{\phi}$ & $++$ & Triangular & 30 & 100 & 100 \\
-    \hline
-    $U_{\psi}$ & $--$ & Triangular & -100 & -100 & -50 \\
-    $U_{\psi}$ & $-$  & Triangular & -100 & -50 & 0 \\
-    $U_{\psi}$ & $0$  & Triangular & -50 & 0 & 50 \\
-    $U_{\psi}$ & $+$  & Triangular & 50 & 50 & 100 \\
-    $U_{\psi}$ & $++$ & Triangular & 50 & 100 & 100 \\
-    \hline
-\end{tabular}
-\caption{Funções de Pertinência do Entrada do Sistema $U$.}
-\label{tab:fuzzy_error}
-\end{table}
+        $E_x$ & $--$ & Triangular & -10 & -10 & -1 \\
+        $E_x$ & $-$  & Triangular & -10 & -1 & 0 \\
+        $E_x$ & $0$  & Triangular & -1 & 0 & 1 \\
+        $E_x$ & $+$  & Triangular & 0 & 1 & 10 \\
+        $E_x$ & $++$ & Triangular & 1 & 10 & 10 \\
+        \hline
+        $E_{z}$ & $--$ & Triangular & -10 & -10 & -0.01 \\
+        $E_{z}$ & $-$  & Triangular & -10 & -0.01 & 0 \\
+        $E_{z}$ & $0$  & Triangular & -0.01 & 0 & 0.01 \\
+        $E_{z}$ & $+$  & Triangular & 0 & 0.01 & 10 \\
+        $E_{z}$ & $++$ & Triangular & 0.01 & 10 & 10 \\
+        \hline
+        $E_{\phi}$ & $--$ & Triangular & -15 & -15 & -0.1 \\
+        $E_{\phi}$ & $-$  & Triangular & -15 & -0.1 & 0 \\
+        $E_{\phi}$ & $0$  & Triangular & -0.1 & 0 & 0.1 \\
+        $E_{\phi}$ & $+$  & Triangular & 0.1 & 0.1 & 15 \\
+        $E_{\phi}$ & $++$ & Triangular & 0.1 & 15 & 15 \\
+        \hline
+        $E_{\psi}$ & $--$ & Triangular & -45 & -45 & -0.1 \\
+        $E_{\psi}$ & $-$  & Triangular & -45 & -0.1 & 0 \\
+        $E_{\psi}$ & $0$  & Triangular & -0.1 & 0 & 0.1 \\
+        $E_{\psi}$ & $+$  & Triangular & 0.1 & 0.1 & 45 \\
+        $E_{\psi}$ & $++$ & Triangular & 0.1 & 45 & 45 \\
+        \hline
+        $V_x$ & $-$ & Triangular & -5 & -5 & -0 \\
+        $V_x$ & $0$  & Triangular & -5 & 0 & 5 \\
+        $V_x$ & $+$ & Triangular & 0 & 5 & 5 \\
+        \hline
+        $V_{z}$ & $-$  & Triangular & -50 & -50 & 0 \\
+        $V_{z}$ & $0$  & Triangular & -50 & 0 & 50 \\
+        $V_{z}$ & $+$  & Triangular & 0 & 50 & 50 \\
+        \hline
+        $V_{\phi}$ & $-$  & Triangular & -20 & -20 & 0 \\
+        $V_{\phi}$ & $0$  & Triangular & -20 & 0 & 20 \\
+        $V_{\phi}$ & $+$  & Triangular & 20 & 30 & 20 \\
+        \hline
+        $V_{\psi}$ & $-$  & Triangular & -20 & -20 & 0 \\
+        $V_{\psi}$ & $0$  & Triangular & -20 & 0 & 20 \\
+        $V_{\psi}$ & $+$  & Triangular & 20 & 20 & 20 \\
+        \hline
+        $U_x$ & $--$ & Triangular & -20 & -20 & -10 \\
+        $U_x$ & $-$  & Triangular & -20 & -10 & 0 \\
+        $U_x$ & $0$  & Triangular & -10 & 0 & 10 \\
+        $U_x$ & $+$  & Triangular & 0 & 10 & 20 \\
+        $U_x$ & $++$ & Triangular & 10 & 20 & 20 \\
+        \hline
+        $U_{z}$ & $--$ & Triangular & -100 & -100 & -50 \\
+        $U_{z}$ & $-$  & Triangular & -100 & -50 & 0 \\
+        $U_{z}$ & $0$  & Triangular & -50 & 0 & 50 \\
+        $U_{z}$ & $+$  & Triangular & 0 & 50 & 100 \\
+        $U_{z}$ & $++$ & Triangular & 50 & 100 & 100 \\
+        \hline
+        $U_{\phi}$ & $--$ & Triangular & -100 & -100 & -30 \\
+        $U_{\phi}$ & $-$  & Triangular & -100 & -30 & 0 \\
+        $U_{\phi}$ & $0$  & Triangular & -30 & 0 & 30 \\
+        $U_{\phi}$ & $+$  & Triangular & 30 & 30 & 100 \\
+        $U_{\phi}$ & $++$ & Triangular & 30 & 100 & 100 \\
+        \hline
+        $U_{\psi}$ & $--$ & Triangular & -100 & -100 & -50 \\
+        $U_{\psi}$ & $-$  & Triangular & -100 & -50 & 0 \\
+        $U_{\psi}$ & $0$  & Triangular & -50 & 0 & 50 \\
+        $U_{\psi}$ & $+$  & Triangular & 50 & 50 & 100 \\
+        $U_{\psi}$ & $++$ & Triangular & 50 & 100 & 100 \\
+        \hline
+    \end{longtable}
+\end{center}
+\vspace{-1.5cm}
