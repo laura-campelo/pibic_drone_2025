@@ -88,8 +88,7 @@ com a biblioteca PyGAD (versão 3.4.0). Os parâmetros utilizados estão listado
     \label{tab:ga_params_summary}
 \end{table}
 
-\subsection{Resultados}
-Os parâmetros otimizados resultantes estão organizados na Tabela \ref{tab:pid_values}.
+Por fim, os parâmetros otimizados resultantes estão organizados na Tabela \ref{tab:pid_values}.
 \begin{table}[h!]
     \centering
     \caption{Valores Otimizados para os Controladores PID}
@@ -103,22 +102,24 @@ Os parâmetros otimizados resultantes estão organizados na Tabela \ref{tab:pid_
     \end{tabular}
 \end{table}
 
-O desempenho do controlador PID otimizado é ilustrado na Figura \ref{fig:ga_performance}.
-\begin{figure}[h!]
-    \centering
-    \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético.}
-    \includegraphics[width=0.9\textwidth]{figs/ga_inner.pdf}
-    \label{fig:ga_performance}
-\end{figure}
+% \subsection{Resultados}
 
-Isto posto, foi preciso, então, implementar dois controladores adicionais para gerenciar as 
-variáveis $x$ e $y$ do drone. Esses controladores foram configurados de modo que um erro de $1m$ 
-em $x$ ou $y$ causasse um de $3\degree$ em $\phi$ ou $\theta$. Adicionalmente, foi 
-especificado um limite máximo de $10\degree$ para as referências de $\phi$ e $\theta$. A Figura 
-\ref{fig:ga_outer_performance} apresenta o resultado final para o controlador em cascata. 
-\begin{figure}[h!]
-    \centering
-    \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético Cascata.}
-    \includegraphics[width=0.9\textwidth]{figs/ga_cas.pdf}
-    \label{fig:ga_outer_performance}
-\end{figure}
+% O desempenho do controlador PID otimizado é ilustrado na Figura \ref{fig:ga_performance}.
+% \begin{figure}[h!]
+%     \centering
+%     \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético.}
+%     \includegraphics[width=0.9\textwidth]{figs/ga_inner.pdf}
+%     \label{fig:ga_performance}
+% \end{figure}
+
+% Isto posto, foi preciso, então, implementar dois controladores adicionais para gerenciar as 
+% variáveis $x$ e $y$ do drone. Esses controladores foram configurados de modo que um erro de $1m$ 
+% em $x$ ou $y$ causasse um de $3\degree$ em $\phi$ ou $\theta$. Adicionalmente, foi 
+% especificado um limite máximo de $10\degree$ para as referências de $\phi$ e $\theta$. A Figura 
+% \ref{fig:ga_outer_performance} apresenta o resultado final para o controlador em cascata. 
+% \begin{figure}[h!]
+%     \centering
+%     \caption{Desempenho do Controlador PID Otimizado pelo Algoritmo Genético Cascata.}
+%     \includegraphics[width=0.9\textwidth]{figs/ga_cas.pdf}
+%     \label{fig:ga_outer_performance}
+% \end{figure}
