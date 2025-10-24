@@ -1,8 +1,39 @@
 \section{Regulador Quadrático Linear (LQR)}
 \subsection{Conceito}
-
+Indo agora para o domínio de estratégias que utilizam modelos lineares, o LQR é uma técnica de 
+controle ótimo aplicada a sistemas linearizados descritos no espaço de estados por $\dot{x}' = 
+\mathbf{A} x' + \mathbf{B} u'$ (ver seção \ref{sec:linear}). 
+Nesse contexto, busca-se determinar uma matriz de ganhos $K$ tal que a lei de controle $u = -Kx$ 
+estabilize o sistema e minimize uma função de custo quadrática:
+\begin{equation}
+    J = \int_0^\infty (x^T Q x + u^T R u) dt,
+    \label{eq:custo_lqr}
+\end{equation}
+\noindent  em que as matrizes $Q$ e $R$ ponderam, respectivamente, a importância das variáveis de 
+estado e do sinal de controle, equilibrando o erro dos estados e o esforço de controle. A 
+minimização dessa função de custo leva à equação de Riccati: 
+\begin{equation}
+    A^T P + PA - PBR^{-1}B^TP + Q = 0,
+\end{equation}
+\noindent cuja solução $P$ permite calcular o ganho ótimo por:
+\begin{equation}
+    K = R^{-1}B^TP.
+\end{equation}
 
 \subsection{Implementação}
+Para a implementação, foi necessário fazer algumas decisões quanto ao sistema que seria utilizado, 
+pois, como é necessário atuar indiretamente sobre os ângulos $\phi$ e $\theta$ para controlar as 
+posições $x$ e $y$, o LQR poderia apresentar respostas instáveis em razão da utilização do modelo 
+linearizado que não leva em conta os efeitos ocasionados pela rotação do drone. Para evitar 
+esse problema, o sistema foi simplificado utilizando apenas uma submatriz das matrizes $A$ e $B$ 
+dadas na seção \ref{sec:linear} contendo as variáveis $z$, $\phi$, $\theta$ e $\psi$ e suas 
+respectivas velocidades. Assim, obteve-se o sistema reduzido $\dot{x}' = 
+\mathbf{A_{lqr}} x' + \mathbf{B_{lqr}} u'$, definidos como:
+\begin{equation}
+    A_{lqr} = [a_{ij}]_{ij} \mid i > 2 \land j > 2, \quad B_{lqr} = [b_{ij}]_{ij} \mid i > 2.
+\end{equation}
 
+Por fim, a implementação do LQR foi feita utilizando a biblioteca \texttt{control} do Python 
+(versão 0.10.1).
 
 % \subsection{Resultados}
