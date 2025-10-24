@@ -1,8 +1,52 @@
 \section{Controle Preditivo Baseado em Modelo Não-Linear (NMPC)}
 \subsection{Conceito}
+O NMPC é uma técnica de controle ótimo que utiliza um modelo matemático não linear do sistema para 
+prever seu comportamento futuro e calcular, em tempo real, as melhores ações de controle. Nesse contexto, 
+uma de suas características relevantes é a sua capacidade de considerar simultaneamente o desempenho 
+desejado e os limites operacionais de modo que ele possui uma boa eficácia quando confrontado com 
+sistemas reais complexos. Além disso, essa técnica opera sobre dois horizontes: o de predição ($\mathrm{P}$), que define 
+quantos passos à frente o controlador prevê, e o de controle ($\mathrm{M}$), que determina quantas ações de 
+controle serão planejadas para atingir a referência desejada.
 
+A cada instante, o controlador resolve um problema de otimização que busca minimizar uma função de custo, normalmente composta 
+pelo erro entre as saídas previstas e as desejadas, além do esforço de controle. Neste trabalho, a 
+função de custo é a seguinte:
+\begin{equation*}
+    C = \mathrm{\int_{t}^{t+P} x^{T}_{e}Qx_e+u^{T}_{e}Ru_e \,d\tau},
+\end{equation*}
+\noindent em que $\mathrm{P}$, como dito anteriormente, é o horizonte de predição, $\mathrm{Q}$ 
+é a matriz positiva que pondera os desvios nas variáveis de estado e $\mathrm{R}$ é a matriz 
+positiva que pondera os desvios nos esforços de controle.
+
+Apenas a primeira ação calculada é aplicada ao sistema, e o processo é repetido continuamente 
+com base no novo estado medido — um procedimento conhecido como horizonte deslizante 
+\textit{(receding horizon)}. Dessa forma, o NMPC ajusta suas decisões a cada iteração, garantindo 
+um controle adaptativo e robusto frente a não linearidades e perturbações do sistema.
 
 \subsection{Implementação}
+Para implementar o NMPC foi utilizado o \textit{Otimizador de Ponto Interior (IPOPT)}, cuja aplicação 
+é voltada para problemas de otimização não-linear em grande escala, em conjunto com o \textit{CasADI} 
+(ferramenta de modelagem simbólica), ambos disponíveis em Python. Além disso, a Tabela 
+\ref{tab:nmpc_params} explicita os parâmetros utilizados na implementação do NMPC.
 
+\begin{table}[h!]
+    \centering
+    \caption{Condições Aplicadas no NMPC}
+    \label{tab:nmpc_params}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \emph{Condição}                            & \emph{Tipo}              & \emph{Valor}          \\ \hline
+        Horizonte de Predição ($P$)                & Parâmetro                & 30 passos               \\ \hline
+        Horizonte de Controle ($M$)                & Parâmetro                & 30 passos               \\ \hline
+        Set Point                                  & Parâmetro                & Circuito pré-definido   \\ \hline
+        Erro de posição em $\mathtt{X, Y, Z}$      & Penalização              & -                       \\ \hline
+        Excesso de velocidade linear               & Penalização              & -                       \\ \hline
+        Excesso de velocidade angular              & Penalização              & -                       \\ \hline
+        Dinâmica do modelo                         & Restrição                & -                       \\ \hline
+        Ângulos $\phi$ e $\theta$  & Restrição                & $\leq 5^{\circ}$               \\ \hline
+    \end{tabular}
+\end{table}
+
+\pagebreak
 
 % \subsection{Resultados}
