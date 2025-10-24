@@ -76,21 +76,45 @@ Tabela \ref{tab:vars}). Na prática, utiliza-se a Matriz de Ganhos Relativos (RG
 
 \noindent em que $G$ é a matriz de ganhos do sistema definida em estado estacionário. Aplicando a fórmula 
 acima para o sistema em questão, obtemos:
-\begin{table}[h!]
-    \centering
-    \caption{Matriz de Ganho Relativo do Sistema}
-    \begin{tabular}{c|cccc}
-        & $U_1$ & $U_2$ & $U_3$ & $U_4$\\
+\vspace{-0.4cm}
+\begin{center}
+    \begin{longtable}{|c|c|c|c|c|} % <-- note o uso de p{largura}
+        \caption{Matriz de Ganho Relativo do Sistema} \vspace{-0.4cm}
+        \label{tab:rga}
         \hline
-        $z$ & $0.25$ & $0.25$ & $0.25$ & $0.25$\\
-        $\phi$ & $0$ & $0.5$ & $0$ & $0.5$\\
-        $\theta$ & $0.5$ & $0$ & $0.5$ & $0$\\
-        $\psi$ & $0.25$ & $0.25$ & $0.25$ & $0.25$
-    \end{tabular}%
-    \label{tab:rga}
-\end{table}
+        Variáveis & $U_1$ & $U_2$ & $U_3$ & $U_4$\\
+        \hline
+        \endfirsthead
+        % \hline
+        % \emph{Parâmetros} & \emph{Descrição} & \emph{Valores} & \emph{Unidade} \\
+        % \hline
+        \endhead
+        \endfoot
+        \caption*{\footnotesize{Fonte: Autora.}} \vspace{-2cm}
+        \endlastfoot
 
-\pagebreak
+        $z$ & $0.25$ & $0.25$ & $0.25$ & $0.25$\\ \hline
+        $\phi$ & $0$ & $0.5$ & $0$ & $0.5$\\ \hline
+        $\theta$ & $0.5$ & $0$ & $0.5$ & $0$\\ \hline
+        $\psi$ & $0.25$ & $0.25$ & $0.25$ & $0.25$ \\
+        \hline
+    \end{longtable}
+\end{center}
+% \begin{table}[h!]
+%     \centering
+%     \caption{Matriz de Ganho Relativo do Sistema}
+%     \begin{tabular}{c|cccc}
+%         & $U_1$ & $U_2$ & $U_3$ & $U_4$\\
+%         \hline
+%         $z$ & $0.25$ & $0.25$ & $0.25$ & $0.25$\\
+%         $\phi$ & $0$ & $0.5$ & $0$ & $0.5$\\
+%         $\theta$ & $0.5$ & $0$ & $0.5$ & $0$\\
+%         $\psi$ & $0.25$ & $0.25$ & $0.25$ & $0.25$
+%     \end{tabular}%
+%     \label{tab:rga}
+% \end{table}
+
+% \pagebreak
 
 Para interpretar esses resultados, é preciso saber que valores iguais ou bastante próximos a $1$ 
 querem dizer que aquele par de variáveis pode ser utilizado para um controle isolado do resto do sistema, 

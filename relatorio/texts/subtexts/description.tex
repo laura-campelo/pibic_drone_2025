@@ -12,23 +12,22 @@ representa os dois sistemas de coordenadas necessários para a modelagem: o ``Bo
 sistema de coordenadas móvel que tem o centro do drone como encontro dos eixos e no qual medimos as angulações 
 do aparelho, e o ``Inertial Frame'', relativo ao sistema de coordenadas fixo no solo que é utilizado para 
 obtenção das coordenadas de posição no espaço.
-
 \begin{figure}[h!]
     \centering
-    \caption{Esquema de um quadcóptero. \cite{luukkonen}}
+    \caption{Esquema de um quadcóptero.}
     \includegraphics[width=0.8\textwidth]{figs/desenho_drone.png}
+    \caption*{\footnotesize{Fonte: Luukkonen, 2011. \cite{luukkonen}}}
     \label{fig:modelo}
 \end{figure}
 
 \subsection{Dinâmica}
-
 Passando para uma interpretação mais matemática do modelo do drone, é importante explicitar as equações diferenciais 
 que regem a dinâmica do sistema, porém, antes disso, é preciso definir suas variáveis de estado (ver Tabela \ref{tab:vars}) 
 e seus parâmetros (ver Tabela \ref{tab:params}).
-\vspace{-0.2cm}
+\vspace{-0.3cm}
 \begin{table}[h!]
     \centering
-    \caption{Variáveis de estado do sistema}
+    \caption{Variáveis de estado do sistema} \vspace{-0.4cm}
     \begin{tabular}{|c|c|c|}
         \hline
         \emph{Variáveis} & \emph{Descrição} & \emph{Unidade} \\ \hline
@@ -37,20 +36,27 @@ e seus parâmetros (ver Tabela \ref{tab:params}).
         ${u, v, w}$& Velocidade do drone nos eixos x, y e z & m/s \\ \hline
         ${p, q, r}$& Velocidade angular da rotação em torno dos eixos x, y e z & rad/s \\ \hline
     \end{tabular}
+    \caption*{\footnotesize{Fonte: Autora.}}
     \label{tab:vars}
 \end{table}
 
-\vspace{-1cm}
+\vspace{-1.5cm}
 
 \begin{center}
     \begin{longtable}{|c|c|c|c|} % <-- note o uso de p{largura}
-        \caption{Parâmetros do sistema} \vspace{-0.7cm}
+        \caption{Parâmetros do sistema} \vspace{-0.4cm}
         \label{tab:params}
         \hline
         \emph{Parâmetros} & \emph{Descrição} & \emph{Valores} & \emph{Unidade} \\
         \hline
         \endfirsthead
+        % \hline
+        % \emph{Parâmetros} & \emph{Descrição} & \emph{Valores} & \emph{Unidade} \\
+        % \hline
         \endhead
+        \endfoot
+        \caption*{\footnotesize{Fonte: Autora.}} \vspace{-0.8cm}
+        \endlastfoot
 
         $\mathtt{m}$ & Massa do drone & $0,468$ &kg \\ \hline
         $\mathtt{g}$ & Aceleração da gravidade & $9,81$ & m/s² \\ \hline
@@ -113,15 +119,13 @@ Como é possível notar, todos os movimentos precisam da ação conjunta dos rot
 as ações do controlador, as quais buscam controlar as saídas do modelo (como, por exemplo, movimentação em $z$ ou 
 angulação em $\phi$), são dadas em funções dessas saídas, o que torna necessária uma conversão entre as ações dadas 
 pelo controlador e aquelas que serão efetivamente enviadas para os motores.
-
 \begin{figure}[h!]
     \centering
-    \caption{Correspondências entre velocidades angulares e movimentações do crone. \cite{usp}}
+    \caption{Correspondências entre velocidades angulares e movimentações do crone.}
     \includegraphics[width=0.6\textwidth]{figs/mov_drone.png}
+    \caption*{\footnotesize{Fonte: Pfeifer, 2013. \cite{usp}}} \vspace{-0.9cm}
     \label{fig:movimento}
 \end{figure}
-
-\pagebreak
 
 Foi por esse motivo que se decidiu criar 
 um ``bloco'' a mais no diagrama de controle que fosse responsável apenas por fazer essa conversão. Assim, as relações 

@@ -37,21 +37,22 @@ regras, que determinam a resposta dinâmica do sistema.
 \subsection{Implementação}
 A Figura \ref{fig:pid_diagram} esquematiza o controlador fuzzy que foi desenvolvido neste trabalho cuja 
 implementação foi feita em Python, utilizando as bibliotecas \texttt{scikit-fuzzy} e \texttt{SciPy}. 
+Como o drone é simétrico, os controladores de $\phi$ e $\theta$, bem como os de $x$ e $y$, 
+compartilham, respectivamente, as mesmas funções de pertinência. Por fim, foram definidas duas 
+entradas para cada controlador — $E_i$ (erro em $i$) e $V_i$ (velocidade em $i$) —, bem como uma 
+saída — $U_i$ (saída de controle em $i$).
 \begin{figure}[h!]
     \centering
     \caption{Diagrama de Blocos do Controlador fuzzy para o Drone.}
     \includegraphics[width=0.9\textwidth]{figs/fuzzy_drone.png}
+    \caption*{\footnotesize{Fonte: Autora.}}
     \label{fig:pid_diagram}
 \end{figure}
 
 \pagebreak
 
-Como o drone é simétrico, os controladores de $\phi$ e $\theta$, bem como os de $x$ e $y$, 
-compartilham, respectivamente, as mesmas funções de pertinência. Por fim, foram definidas duas 
-entradas para cada controlador — $E_i$ (erro em $i$) e $V_i$ (velocidade em $i$) —, bem como uma 
-saída — $U_i$ (saída de controle em $i$). A Tabela \ref{tab:func_pert} agrupa todas as funções de pertinência 
+A Tabela \ref{tab:func_pert} agrupa todas as funções de pertinência 
 utilizadas neste trabalho.
-
 \input{texts/subtexts/tab_fuzzy.tex}
 
 Por fim, seguem abaixo as regras implementadas nos controladores fuzzy:
