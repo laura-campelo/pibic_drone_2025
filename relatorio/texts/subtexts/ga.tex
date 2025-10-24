@@ -46,13 +46,16 @@ testar a resposta dos controladores em diferentes condições.
 \vspace{-0.5cm}
 \begin{center}
     \begin{longtable}{|c|c|}
-        \caption{Referências aplicadas às variáveis controladas} \vspace{-0.7cm}
+        \caption{Referências aplicadas às variáveis controladas} \vspace{-0.4cm}
         \label{tab:ref_traj}
         \hline
         \emph{Variável} & \emph{Mudança da Referência} \\
         \hline
         \endfirsthead
         \endhead
+        \endfoot
+        \caption*{\footnotesize{Fonte: Autora.}} \vspace{-0.55cm}
+        \endlastfoot
 
         $z$ & $2m \text{ em } t=0$s; $1m \text{ em } t=24$s \\
         \hline
@@ -92,7 +95,7 @@ com a biblioteca PyGAD (versão 3.4.0). Os parâmetros utilizados estão listado
 \vspace{-0.2cm}
 \begin{table}[h!]
     \centering
-    \caption{Parâmetros principais do Algoritmo Genético}
+    \caption{Parâmetros principais do Algoritmo Genético} \vspace{-0.3cm}
     \begin{tabular}{|c|c||c|c|}
         \hline
         \emph{Parâmetro} & \emph{Valor} & \emph{Parâmetro} & \emph{Valor} \\
@@ -108,13 +111,14 @@ com a biblioteca PyGAD (versão 3.4.0). Os parâmetros utilizados estão listado
         Percentual de Genes Mutados & $30\%$ & Intervalo Inicial & $[0, 10^5]$ \\
         \hline
     \end{tabular}
+    \caption*{\footnotesize{Fonte: Autora.}} \vspace{-0.55cm}
     \label{tab:ga_params_summary}
 \end{table}
 
 Por fim, os parâmetros otimizados resultantes estão organizados na Tabela \ref{tab:pid_values}.
 \begin{table}[h!]
     \centering
-    \caption{Valores Otimizados para os Controladores PID}
+    \caption{Valores Otimizados para os Controladores PID} \vspace{-0.3cm}
     \label{tab:pid_values}
     \begin{tabular}{|c|c|c|c|}
         \hline
@@ -123,6 +127,5 @@ Por fim, os parâmetros otimizados resultantes estão organizados na Tabela \ref
         $\phi$, $\theta$ & 99033.59       & 33359.94       & 96089.17       \\ \hline
         $\psi$           & 98701.15       & 46709.60       & 72527.38       \\ \hline
     \end{tabular}
+    \caption*{\footnotesize{Fonte: Autora.}} \vspace{-0.55cm}
 \end{table}
-
-.

@@ -1,2 +1,82 @@
 \section{Resultados}
-\lipsum[1]
+
+\subsubsection{Comparativo Visual}
+Foram comparadas quatro variáveis do drone: $x$, $z$, $\phi$ e $\psi$, 
+pois $y$ e $\theta$ são simétricas a $x$ e $\phi$, respectivamente.
+\begin{figure}[h!]
+    \centering
+    \caption{Comparação dos controladores para a variável $x$.} \vspace{-0.3cm}
+    \includegraphics[width=0.8\textwidth]{figs/x_results.pdf}
+    \vspace{-0.5cm} \caption*{\footnotesize{Fonte: Autora.}} \vspace{-1cm}
+    \label{fig:x_results}
+\end{figure}
+
+Para a variável $x$, sem dúvidas o controlador que se saiu melhor foi o NMPC. Enquanto isso, o Fuzzy 
+e o LQR apresentaram resultados relativamente similares, com o primeiro se saindo um pouco melhor 
+quando se trata de overshoot e oscilações. Já o GA não conseguiu se adaptar tão bem, apresentando 
+bastante oscilação e overshoots expressivos.
+\begin{figure}[h!]
+    \centering
+    \caption{Comparação dos controladores para a variável $z$.} \vspace{-0.3cm}
+    \includegraphics[width=0.8\textwidth]{figs/z_results.pdf}
+    \vspace{-0.5cm} \caption*{\footnotesize{Fonte: Autora.}} \vspace{-1cm}
+    \label{fig:z_results}
+\end{figure}
+\pagebreak
+
+Na variável $z$, apesar de ter tido novamente o melhor desempenho, o NMPC apresentou oscilações 
+bastanta bruscas devido à influência das outras variáveis, principalmente os ângulos. O LQR demorou 
+consideravelmente para reagir, apresentando um tempo de subida mais expressivo se comparado com os demais 
+enquanto o GA novamente sofreu com overshoots significativos. Por último, o Fuzzy mostrou um desempenho 
+bastante aceitável, com overshoots baixos e com oscilações discretas.
+\begin{figure}[h!]
+    \centering
+    \caption{Comparação dos controladores para a variável $\phi$.} \vspace{-0.3cm}
+    \includegraphics[width=0.8\textwidth]{figs/phi_results.pdf}
+    \vspace{-0.5cm} \caption*{\footnotesize{Fonte: Autora.}} \vspace{-1cm}
+    \label{fig:phi_results}
+\end{figure}
+\pagebreak
+
+Para a variável $\phi$, o NMPC, apesar de ter respeitado os limites impostos para os ângulos, 
+sofreu com oscilações muito bruscas. O GA e o LQR foram capazes de acompanhar bem as referências dadas 
+enquanto o Fuzzy não conseguiu se adaptar bem, apresentando, de longe, o pior dos desempenhos.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figs/psi_results.pdf} \vspace{-0.3cm}
+    \caption{Comparação dos controladores para a variável $\psi$.}
+    \vspace{-0.5cm} \caption*{\footnotesize{Fonte: Autora.}} \vspace{-0.7cm}
+    \label{fig:psi_results}
+\end{figure}
+
+Por fim, na variável $\psi$, o GA apresentou o melhor desempenho, estabilizando rapidamente o ângulo 
+apesar do overshoot, enquanto os outros controladores demoraram mais para atingir a estabilidade.
+O NMPC teve um desempenho ruim pois ele está fazendo o $\phi$ perder o controle do giro, por isso
+ele foi bastante penalizado para mover o $\psi$ devagar.
+
+\subsubsection{Comparativo Numérico}
+A Tabela \ref{tab:ise} apresenta os valores de ISE (Integral Square Error) para cada controlador. 
+Como o NMPC não possui referência para $\phi$ e $\theta$, não foi possível calcular o ISE para essas variáveis.
+\vspace{-0.5cm}
+\begin{center}
+    \begin{longtable}{|c|c|c|c|c|c|c|}
+        \caption{Valores de ISE para diferentes controladores.} \vspace{-0.4cm}
+        \label{tab:ise}
+        \hline
+        \emph{Controlador} & $x$ & $y$ & $z$ & $\phi$ & $\theta$ & $\psi$ \\ 
+        \hline
+        \endfirsthead
+        \endhead
+        \endfoot
+        \caption*{\footnotesize{Fonte: Autora.}} \vspace{-2cm}
+        \endlastfoot
+
+        Fuzzy       & 2491.7  & 1731.6  & 181.8  & 0.462  & 0.462   & 15.2   \\ \hline
+        GA          & 879.48  & 708.49  & 49.74  & 0.036  & \textbf{0.044}   & \textbf{1.20}   \\ \hline
+        LQR         & 1962.4  & 1260.4  & 187.3  & \textbf{0.035}  & 0.100   & 8.84   \\ \hline
+        MPC         & \textbf{687.63}  & \textbf{496.66}  & \textbf{35.42}  & x         & x    & 31.89   \\ \hline
+    \end{longtable}
+\end{center}
+
+Os resultados mostram que o NMPC teve o melhor desempenho em $x$, $y$ e $z$, enquanto o GA se destacou em $\theta$ e $\psi$. 
+O LQR apresentou desempenho intermediário, e o Fuzzy teve os piores resultados em todas as variáveis.

@@ -29,13 +29,20 @@ Para implementar o NMPC foi utilizado o \textit{Otimizador de Ponto Interior (IP
 (ferramenta de modelagem simbólica), ambos disponíveis em Python. Além disso, a Tabela 
 \ref{tab:nmpc_params} explicita os parâmetros utilizados na implementação do NMPC.
 
-\begin{table}[h!]
-    \centering
-    \caption{Condições Aplicadas no NMPC}
-    \label{tab:nmpc_params}
-    \begin{tabular}{|c|c|c|}
+\vspace{-0.5cm}
+\begin{center}
+    \begin{longtable}{|c|c|c|} % <-- note o uso de p{largura}
+        \caption{Condições Aplicadas no NMPC} \vspace{-0.4cm}
+        \label{tab:nmpc_params}
         \hline
-        \emph{Condição}                            & \emph{Tipo}              & \emph{Valor}          \\ \hline
+        \emph{Condição} & \emph{Tipo} & \emph{Valor} \\
+        \hline
+        \endfirsthead
+        \endhead
+        \endfoot
+        \caption*{\footnotesize{Fonte: Autora.}} \vspace{-0.55cm}
+        \endlastfoot
+
         Horizonte de Predição ($P$)                & Parâmetro                & 30 passos               \\ \hline
         Horizonte de Controle ($M$)                & Parâmetro                & 30 passos               \\ \hline
         Set Point                                  & Parâmetro                & Circuito pré-definido   \\ \hline
@@ -44,9 +51,28 @@ Para implementar o NMPC foi utilizado o \textit{Otimizador de Ponto Interior (IP
         Excesso de velocidade angular              & Penalização              & -                       \\ \hline
         Dinâmica do modelo                         & Restrição                & -                       \\ \hline
         Ângulos $\phi$ e $\theta$  & Restrição                & $\leq 5^{\circ}$               \\ \hline
-    \end{tabular}
-\end{table}
+    \end{longtable}
+\end{center}
+\vspace{-1.5cm}
 
-\pagebreak
+% \begin{table}[h!]
+%     \centering
+%     \caption{Condições Aplicadas no NMPC}
+%     \label{tab:nmpc_params}
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         \emph{Condição}                            & \emph{Tipo}              & \emph{Valor}          \\ \hline
+%         Horizonte de Predição ($P$)                & Parâmetro                & 30 passos               \\ \hline
+%         Horizonte de Controle ($M$)                & Parâmetro                & 30 passos               \\ \hline
+%         Set Point                                  & Parâmetro                & Circuito pré-definido   \\ \hline
+%         Erro de posição em $\mathtt{X, Y, Z}$      & Penalização              & -                       \\ \hline
+%         Excesso de velocidade linear               & Penalização              & -                       \\ \hline
+%         Excesso de velocidade angular              & Penalização              & -                       \\ \hline
+%         Dinâmica do modelo                         & Restrição                & -                       \\ \hline
+%         Ângulos $\phi$ e $\theta$  & Restrição                & $\leq 5^{\circ}$               \\ \hline
+%     \end{tabular}
+% \end{table}
+
+% \pagebreak
 
 % \subsection{Resultados}
